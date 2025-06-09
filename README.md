@@ -22,7 +22,7 @@ The central component is the `BIMicrodataExtractor` class, which offers:
 - Housing conditions (rent, property, loan)
 - Family debts
 - Family wealth and assets
-- Payment instruments
+- Payment options
 - Saving solutions
 - Families expenses
 - Insurance solutions
@@ -47,40 +47,53 @@ After loading the data in the `BIMicrodataExtractor` class, the information rela
 ```bash
 git clone git@github.com:Clearbox-AI/bancaitalia-microdata-extractor.git
 
+pip install -r path/to/bancaitalia-microdata-extractor/requirements.txt
+
 pip install -e path/to/bancaitalia-microdata-extractor
 ```
 
 To setup your **AVQ ISTAT Microdata**, unzip the data folder you find [here](https://github.com/Clearbox-AI/ISTAT-microdata-extractor/tree/main/data) and provide the path to the unzipped folder to the `load_data()` method of your `BIMicrodataExtractor` class to get started!
 
+#### Updating version
+
+To update your local version go to your local folder and run:
+
+```bash
+git pull origin main
+
+pip install -e bancaitalia-microdata-extractor
+```
+
 ### 📊 Examples
 ```python
-from microdata_extractor import ISTATMicrodataExtractor
+from microdata_extractor import BIMicrodataExtractor
 
 # Supposing your AVQ Microdata ISTAT is stored in "BFI_2022"
 # After loading the data, the class bfi will features two attributes being:
 # - bfi.df_families (with information about the families) 
 # - bfi.df_familymembers (with information about the single members of the families)
-bfi = ISTATMicrodataExtractor()
-bfi.load_data("BFI_2022")
+mde = BIMicrodataExtractor()
+mde.load_data("BFI_2022")
 
 
 # Consult the available attribute categories 
-bfi.attribute_categories
+mde.attribute_categories
 
 # Filter attributes by relevant categories
-_ = bfi.get_attributes_by_categories("demographics","unemployment" condition="or")
+_ = mde.get_attributes_by_categories("demographics","unemployment" condition="or")
 
 # Check encodings for categorical variables
-_ = bfi.get_attribute_metadata("STUDIO", print_output=True)
-_ = bfi.get_attribute_metadata("OCCNOW", print_output=True)
+_ = mde.get_attribute_metadata("STUDIO", print_output=True)
+_ = mde.get_attribute_metadata("OCCNOW", print_output=True)
 
 # Compute the joint probability distributions of STUDIO (education level) and OCCNOW (employed/not employed)
 # Compute it only for adults at the time of th esurvay (2022) -> born before 2003 (ANASC<=2003)
 rules = [("ANASC","<=",2003)]
-df_prob = bfi.joint_distribution(attrs=["STUDIO","OCCNOW"], df=bfi.df_familymembers, conditions=rules)
+df_prob = mde.joint_distribution(attrs=["STUDIO","OCCNOW"], df=mde.df_familymembers, conditions=rules)
 ```
 
 ### Contacts
 
 📧 info@clearbox.ai
+
 🌐 [www.clearbox.ai](https://www.clearbox.ai/)
