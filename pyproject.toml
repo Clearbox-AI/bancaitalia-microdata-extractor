@@ -20,5 +20,5 @@ dependencies = [
 Homepage = "https://github.com/Clearbox-AI/BI-microdata-extractor"
 
 [tool.setuptools]
-packages = ["IBFI_microdata_extractor"]
+packages = ["BI_microdata_extractor"]
 include-package-data = true
