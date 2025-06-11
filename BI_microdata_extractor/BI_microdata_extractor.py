@@ -13,7 +13,7 @@ from bs4 import BeautifulSoup
 from functools import reduce
 import operator
 
-class ISTATMicrodataExtractor:
+class BIMicrodataExtractor:
     def __init__(self):        
         self._OPS = {
             "==":  lambda c, v: c == v,
@@ -526,7 +526,7 @@ class ISTATMicrodataExtractor:
 
 if __name__ == "__main__":
 
-    bfi = ISTATMicrodataExtractor()
+    bfi = BIMicrodataExtractor()
     bfi.load_data("Replica/BFI_2022")
     a=bfi.get_attribute_metadata("AFFCHI",print_output=True)
 
