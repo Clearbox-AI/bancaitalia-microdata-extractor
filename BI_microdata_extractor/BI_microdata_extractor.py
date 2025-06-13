@@ -70,6 +70,8 @@ class BIMicrodataExtractor:
                     infer_schema_length=None, 
                 )
         
+        self.DFs = DFs
+        
         df_families = pl.DataFrame()
         for key in dfs_cat["questionari"]:
             if len(df_families)==0:
@@ -181,7 +183,7 @@ class BIMicrodataExtractor:
             # Convert attribute name to number
             try:
                 attribute_name = attribute
-                attribute = self.tracciato_df.filter(pl.col("Acronimovariabile").str.to_uppercase() == attribute.upper()).select("num. ordine questionario").to_numpy()[0][0]
+                attribute = self.tracciato_df.filter(pl.col("Acronimovariabile").str.to_uppercase() == attribute.upper()).select("num. ordine questionario").to_numpy()[0][0].upper()
             except:
                 return None
     
@@ -528,7 +530,7 @@ if __name__ == "__main__":
 
     bfi = BIMicrodataExtractor()
     bfi.load_data("Replica/BFI_2022")
-    a=bfi.get_attribute_metadata("AFFCHI",print_output=True)
+    a=bfi.get_attribute_metadata("APQUAL2",print_output=True)
 
     parentela = "PARENT"
     genere = "SEX"
