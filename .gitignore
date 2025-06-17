@@ -1,2 +1,2 @@
-microdata_extractor.egg-info/*
+*.egg-info/*
 __pycache__
