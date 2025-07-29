@@ -54,6 +54,8 @@ pip install -e path/to/bancaitalia-microdata-extractor
 
 To setup your **AVQ ISTAT Microdata**, unzip the data folder you find [here](https://github.com/Clearbox-AI/ISTAT-microdata-extractor/tree/main/data) and provide the path to the unzipped folder to the `load_data()` method of your `BIMicrodataExtractor` class to get started!
 
+Unlike raw data, this data was processed to allow some methods of the class `BIMicrodataExtractor` to work smoothly.
+
 #### Updating version
 
 To update your local version go to your local folder and run:
